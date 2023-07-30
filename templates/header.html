@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Todo List</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet"
+          type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.min.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="http:///ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+    <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<input id="menu" type="checkbox">
+
+<header>
+    <a href="/"><b>Home</b></a>
+    <a href="javascript:void(0)"><label class="fa fa-bars" for="menu"></label></a>
+</header>
+
+<div class="navbar">
+        <ul class="navbar-nav manu ml-auto">
+            <li><a href="{{url_for('home')}}"><b>Home</b></a></li>
+            <li><a href=""><b>Login</b></a></li>
+            <li><a href=""><b>Register</b></a></li>
+            <li><a href=""><b>Logout</b></a></li>
+            <br><br>
+            <li><a href="javascript:void(0)" ><b><label for="menu">Close</label></b></a></li>
+        </ul>
+</div>
+
+</body>

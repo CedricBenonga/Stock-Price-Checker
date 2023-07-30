@@ -1,0 +1,55 @@
+{% include "header.html" %}
+
+
+<section>
+    <container>
+        <!--    Search-bar-->
+        <nav style="margin-bottom:40px;">
+            <div class="container-fluid">
+                <form action="{{ url_for('search') }}" method="post" class="d-flex"
+                      style="width: 300px;">
+                    <input class="form-control me-2" type="search" placeholder="Search stock"
+                           aria-label="Search"
+                           name="search">
+                    <button class="btn btn-outline-dark" type="submit"
+                            style="height: 44px; border-radius: 5%; margin-top: 14px;">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </container>
+</section>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <!-- Title -->
+        <h1 style="margin-top: 100px; text-align: center;">Welcome to Our<br> Stock Table</h1><br>
+        <section><!-- Stock table section -->
+            <div class="container">
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Country</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for detail in complete_data %}
+                        <tr>
+                            <td>{{ detail[0] }}</td>
+                            <td>{{ detail[1] }}</td>
+                            <td>{{ detail[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section><!-- End of Stock table Section -->
+    </div>
+</div>
+
+{% include "footer.html" %}
