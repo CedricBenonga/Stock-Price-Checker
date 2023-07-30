@@ -5,17 +5,16 @@
 {% include "header.html" %}
 
 <!-- Symbols detailed -->
-<section>
-    <container>
-        <div>
-            <a class="btn btn-outline-dark" href="{{url_for('check_stock')}}"
-                    style="background: #fff; margin-top: 20px; margin-left: 20px; border-radius: 5%; color: #000;"
-                    onMouseOut="this.style.color='#000'"
-                    onMouseOver="this.style.color='#999'">Stock names & Symbols
-            </a>
+
+
+        <div style="background: #E1ECC8; padding-top: 10px; padding-left: 20px; margin-left: 0px; border-radius: 0%; color: #000;">
+            <h3><b><a href="{{url_for('check_stock')}}"
+                      onMouseOut="this.style.color='#000'"
+                      onMouseOver="this.style.color='#A0C49D'">Stock Names & Symbols
+            </a></b></h3>
         </div>
-    </container>
-</section>
+
+
 <!--  Symbols detailed -->
 
 {% if not data %}
@@ -31,7 +30,7 @@
 </div>
 
 <!--Creating form with a customized button and a pop-up error message-->
-<div class="container" style="margin-top: 100px;">
+<div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto content">
             {% with messages = get_flashed_messages() %}
@@ -45,8 +44,10 @@
         </div>
     </div>
 </div>
-<!-- End of form -->
-{% endif %}
+
+{% else %}
+
+
 <div class="container task">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -55,12 +56,15 @@
         </div>
     </div>
 </div>
+<!-- End of form -->
+{% endif %}
+
 
 <div class="container" style="padding-top: 0px; padding-bottom: 100px;">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-sm-1 g-200">
-        {% for d in data %}
+        {% for dt in data %}
         <div class="col" style="height: 30px;">
-            <p>{{ d }}</p>
+            <p><b>{{ dt.split(":")[0] }}:</b>{{ dt.split(":")[1] }}</p>
         </div>
         {% endfor %}
     </div>

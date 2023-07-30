@@ -1,6 +1,6 @@
 body {
   font: 15px arial;
-  background: #fff;  /* 545454 */
+  background: #E1ECC8;
 }
 a {
   text-decoration: none;
@@ -22,14 +22,14 @@ header a {
   padding: 0 12px 0 12px;
 }
 header a:hover {
-  color: #999;
+  color: #A0C49D;
 }
 .navbar a {
   color: #000;
   text-decoration: none;
 }
 .navbar a:hover {
-  color: #b5b5b5;
+  color: #A0C49D;
 }
 
 /* The menubar */
@@ -49,18 +49,18 @@ header {
   left: 100%;
   right: -25%;
   padding: 1.04em;
-  bottom: 0;
+  bottom: 50%;
   color: #b2b2b2;
-  background: #3f3f3f;
+  background: #C4D7B2;
   transition: all ease-in 300ms;
   overflow: hidden;
 }
 #menu:checked ~ .navbar {
-  left: 75%;
+  left: 80%;
   right: 0;
 }
 #menu:checked ~ header {
-  right: 25%;
+  right: 22%;
 }
 .ml-auto {
 padding-right: 25%;
@@ -72,7 +72,7 @@ padding-right: 25%;
   color: #000
 }
 .fab:hover {
-  color: #999
+  color: #A0C49D
 }
 footer{
 }
@@ -86,7 +86,7 @@ footer{
 }
 /******* End of Task *******/
 
-/************ Calendar **********/
+/************ Stock names & symbols **********/
 input{
     background: transparent;
     bottom: 0;
@@ -95,47 +95,4 @@ input{
     height: auto;
     margin-top: 15px;
 }
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* stretch it over the whole field so you can click anywhere in the input field */
-    width: 260px;
-    height: 260px;
-    /* make the calendar invisible */
-    color: transparent;
-    background: transparent;
-
-.fa-calendar{
-    margin-top: 10px;
-    margin-left: 15px;
-}
-/************ End of Calendar **********/
-
-/*************** Calendar on a white bg *************/
-/*
-.input-container input {
-    border: none;
-    box-sizing: border-box;
-    outline: 0;
-    padding: .75rem;
-    position: relative;
-    width: 100%;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-}
-/*************** End of Calendar on a white bg *************/
+/************ End of Stock names & symbols **********/

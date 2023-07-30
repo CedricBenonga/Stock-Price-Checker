@@ -1,19 +1,19 @@
-from pprint import pprint
-import requests
-import os
-
-from flask_bootstrap import Bootstrap5
-from flask_wtf import FlaskForm
 from flask import Flask, render_template, redirect, url_for, flash, request
 from wtforms import DateField, SelectField, SubmitField
 from wtforms.validators import DataRequired
+from flask_bootstrap import Bootstrap5
+from flask_wtf import FlaskForm
+import requests
 import csv
+import os
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKkil'
 Bootstrap5(app)
 
 API_KEY = "6b01136e35e304c91e1a396f8cc9584d"
+# API_KEY = os.environ.get("STOCK_KEY")
 market_url = "http://api.marketstack.com/v1/eod?"  # /intraday(with symbols) ,
 # no symbols needed => /tickers, /exchanges, /currencies, /timezones
 # ex: http://api.marketstack.com/v1/eod?access_key=YOUR_ACCESS_KEY&symbols=AAPL
@@ -23,6 +23,7 @@ market_url = "http://api.marketstack.com/v1/eod?"  # /intraday(with symbols) ,
     & date_to = YYYY-MM-DD
     & limit = 100
     & offset = 0 '''
+
 
 symbols = []
 names = []
@@ -35,10 +36,10 @@ with open("stocks.csv") as dt:
             names.append(n[1])
             countries.append(n[2])
 
-complete = []
+complete_stock = []
 for nbr in range(len(symbols)):
     stock = [names[nbr], symbols[nbr], countries[nbr]]
-    complete.append(stock)
+    complete_stock.append(stock)
 
 
 class Form(FlaskForm):
@@ -65,23 +66,17 @@ def home():
         try:
             response = requests.get(market_url, params=params)
         except requests.exceptions.ConnectionError:
-            flash("No connection.\n Please check your internet and retry again!")
+            flash("No connection.\n Please check your internet and try again!")
             return redirect(url_for('home'))
 
         response.raise_for_status()
         data_raw = response.json()
-
-        pprint(data_raw)
-
         data_origin = data_raw['data']
 
         data_dic = {}
         for element in data_origin:
             data_dic['date'] = element['date'].split('T')[0]
             data_dic['symbol'] = element['symbol']
-            # "Name": "Amazon.com Inc",
-            # "country": "USA"
-
             data_dic['open'] = element['open']
             data_dic['adj_open'] = element['adj_open']
             data_dic['close'] = element['close']
@@ -111,20 +106,24 @@ def home():
 
 @app.route("/check-stock")
 def check_stock():
-    complete_data = complete
+    complete_data = complete_stock
     return render_template("checker.html", complete_data=complete_data)
 
 
 @app.route("/search", methods=["POST", "GET"])
 def search():
     if request.method == 'POST':
-        searched_stock = request.form["search"]  # Or searched_cafe = request.args.get('search')
-        all_stocks = complete
+        searched_stock = request.form["search"]
+        all_stocks = complete_stock
         list_searched_stock = []
         for single_stock in all_stocks:
             if searched_stock.lower() in single_stock[0].lower() or searched_stock.lower() in single_stock[1].lower()\
                     or searched_stock.lower() in single_stock[2].lower():
                 list_searched_stock.append(single_stock)
+
+        if not list_searched_stock:
+            flash(f'Sorry, we don\'t have any record for "{searched_stock}".')
+
         return render_template("checker.html", complete_data=list_searched_stock)
 
 
