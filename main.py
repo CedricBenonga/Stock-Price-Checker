@@ -7,13 +7,11 @@ import requests
 import csv
 import os
 
-
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKkil'
+app.config['SECRET_KEY'] = os.environ.get("APP_KEY")
 Bootstrap5(app)
 
-API_KEY = "6b01136e35e304c91e1a396f8cc9584d"
-# API_KEY = os.environ.get("STOCK_KEY")
+API_KEY = os.environ.get("STOCK_KEY")
 market_url = "http://api.marketstack.com/v1/eod?"  # /intraday(with symbols) ,
 # no symbols needed => /tickers, /exchanges, /currencies, /timezones
 # ex: http://api.marketstack.com/v1/eod?access_key=YOUR_ACCESS_KEY&symbols=AAPL
@@ -23,7 +21,6 @@ market_url = "http://api.marketstack.com/v1/eod?"  # /intraday(with symbols) ,
     & date_to = YYYY-MM-DD
     & limit = 100
     & offset = 0 '''
-
 
 symbols = []
 names = []
@@ -42,8 +39,8 @@ for nbr in range(len(symbols)):
     complete_stock.append(stock)
 
 
-class Form(FlaskForm):
-    symbol = SelectField("Symbol", choices=symbols, validators=[DataRequired()])
+class Form(FlaskForm):  # list "symbols" in alphabetical order => sorted(symbols, key=str.swapcase)
+    symbol = SelectField("Symbol", choices=sorted(symbols, key=str.swapcase), validators=[DataRequired()])
     date_from = DateField("Date From", validators=[DataRequired()])
     date_to = DateField("Date To", validators=[DataRequired()])
     submit = SubmitField("Confirm")
@@ -117,7 +114,7 @@ def search():
         all_stocks = complete_stock
         list_searched_stock = []
         for single_stock in all_stocks:
-            if searched_stock.lower() in single_stock[0].lower() or searched_stock.lower() in single_stock[1].lower()\
+            if searched_stock.lower() in single_stock[0].lower() or searched_stock.lower() in single_stock[1].lower() \
                     or searched_stock.lower() in single_stock[2].lower():
                 list_searched_stock.append(single_stock)
 

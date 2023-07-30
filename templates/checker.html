@@ -2,16 +2,16 @@
 
 <section>
     <container>
-        <!--    Search-bar-->
+        <!--    Search-bar   -->
         <nav style="margin-bottom:40px;">
             <div class="container-fluid">
                 <form action="{{ url_for('search') }}" method="post" class="d-flex"
                       style="width: 300px;">
                     <input class="form-control me-2" type="search" placeholder="Search stock"
                            aria-label="Search"
-                           name="search">
+                           name="search" style="border-radius: 0%;">
                     <button class="btn btn-outline-dark" type="submit"
-                            style="height: 44px; border-radius: 5%; margin-top: 14px;">
+                            style="height: 44px; margin-top: 14px;">
                         Search
                     </button>
                 </form>
@@ -24,18 +24,19 @@
     <div class="col-lg-8 col-md-10 mx-auto">
         <!-- Title -->
         <h1 style="text-align: center;">Welcome to Our<br> Stock Table</h1><br>
-        <section><!-- Stock table section -->
+        <!-- Stock table section -->
+        <section>
             <div class="container">
                 <div>
                     <div style="text-align: center; color: red;">
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                    {% for message in messages %}
-                    <p>{{ message }}</p>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-                        </div>
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -56,7 +57,8 @@
                     </table>
                 </div>
             </div>
-        </section><!-- End of Stock table Section -->
+        </section>
+        <!-- End of Stock table Section -->
     </div>
 </div>
 

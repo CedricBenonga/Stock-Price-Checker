@@ -4,18 +4,14 @@
 {% block content %}
 {% include "header.html" %}
 
-<!-- Symbols detailed -->
-
-
-        <div style="background: #E1ECC8; padding-top: 10px; padding-left: 20px; margin-left: 0px; border-radius: 0%; color: #000;">
-            <h3><b><a href="{{url_for('check_stock')}}"
-                      onMouseOut="this.style.color='#000'"
-                      onMouseOver="this.style.color='#A0C49D'">Stock Names & Symbols
-            </a></b></h3>
-        </div>
-
-
-<!--  Symbols detailed -->
+<!-- Stock Names & Symbols -->
+<div style="background: #E1ECC8; padding-top: 10px; padding-left: 20px; margin-left: 0px; border-radius: 0%; color: #000;">
+    <h3><b><a href="{{url_for('check_stock')}}"
+              onMouseOut="this.style.color='#000'"
+              onMouseOver="this.style.color='#A0C49D'">Stock Names & Symbols
+    </a></b></h3>
+</div>
+<!-- End of Stock Names & Symbols -->
 
 {% if not data %}
 <!-- Task section -->
@@ -34,20 +30,19 @@
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto content">
             {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
             {{ wtf.render_form(form, novalidate=True, button_map={"submit": "btn btn-outline-dark"}) }}
         </div>
     </div>
 </div>
+<!-- End of form -->
 
 {% else %}
-
-
 <div class="container task">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -56,10 +51,9 @@
         </div>
     </div>
 </div>
-<!-- End of form -->
 {% endif %}
 
-
+<!----- Stock details layout ---->
 <div class="container" style="padding-top: 0px; padding-bottom: 100px;">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-sm-1 g-200">
         {% for dt in data %}
@@ -69,6 +63,7 @@
         {% endfor %}
     </div>
 </div>
+<!----- End of Stock details layout ---->
 
 {% include "footer.html" %}
 {% endblock %}
