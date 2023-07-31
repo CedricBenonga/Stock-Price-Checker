@@ -94,7 +94,7 @@ def home():
             data_list.append(formatted_data)
 
         if not data_list:
-            flash("The market is closed on weekend! \nPlease select a weekday.")
+            flash("The market is closed on weekend! \nPlease select a weekday, except today.")
             return redirect(url_for('home'))
 
         return render_template("index.html", data=data_list, form=form)
